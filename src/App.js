@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       current: board.current,
       mines: board.mines,
+      count: 0
     };
   }
 
@@ -50,6 +51,19 @@ class App extends React.Component {
       current.column = 0;
     }
 
+  
+    if(mines[current.row][current.column] === 1){
+      var countmore= this.state.count +1;
+      var copy = mines;
+      copy[current.row][current.column] = 0;
+      this.setState({count:countmore});
+      this.setState({ mines:copy });
+      console.log(this.state.count);
+    }
+
+    if(this.state.count == 7){
+      alert("Ganaste!")
+    }
     // TODO: Did Corgi stepped in a Reactive material?
 
     this.setState({ current, mines });
@@ -58,7 +72,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.__div.focus();
+
   }
+
+  
 
   render() {
     return (
@@ -71,6 +88,7 @@ class App extends React.Component {
         </header>
         <div className="App-board">
           <Board current={this.state.current} mines={this.state.mines}></Board>
+          {/* <Tiles current={{this.state.current.column,this.state.current.row}} mines={} coordinates={} /> */}
         </div>
       </div>
     );
