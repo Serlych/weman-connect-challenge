@@ -6,14 +6,19 @@ import Reactive from './Reactive';
 import { COLUMNS, ROWS } from '../GameState';
 
 function Tile({ current, coordinates, mines }) {
+  // var dog=0;
   if (current.row === coordinates.row && current.column === coordinates.column) {
+    // dog+=1;
+    // console.log('dog:'+ dog)
     return <Doggo></Doggo>;
   }
-
+  // var reactive=0;
   if (mines[coordinates.row][coordinates.column] === 1) {
+    // reactive+=1;
+    // console.log(reactive);
     return <Reactive></Reactive>;
   }
-
+  // return reactive;
   return "";
 }
 
