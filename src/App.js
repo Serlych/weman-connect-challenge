@@ -3,6 +3,9 @@ import Board from './Board/Board';
 import { board, ROWS, COLUMNS } from './GameState';
 
 import './App.css';
+import { get } from 'https';
+
+var i=0;
 
 class App extends React.Component {
 
@@ -17,13 +20,14 @@ class App extends React.Component {
   __div;
 
   handleOnKeyDown = (e) => {
+
     const current = {
       row: this.state.current.row,
       column: this.state.current.column,
     };
 
     const mines = this.state.mines;
-
+    console.log(current);
     if (!['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
       return;
     }
@@ -51,6 +55,13 @@ class App extends React.Component {
     }
 
     // TODO: Did Corgi stepped in a Reactive material?
+    if(mines[current.row][current.column]===1){
+      mines[current.row][current.column]=0;
+      i++
+      if(i>7){
+        alert('ya ganaste');
+      }
+    }
 
     this.setState({ current, mines });
     e.preventDefault();
